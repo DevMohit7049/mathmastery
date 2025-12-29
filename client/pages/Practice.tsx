@@ -120,33 +120,27 @@ export default function Practice() {
   }, []);
 
   const handleCheckAllAnswers = useCallback(() => {
-    if (!focusedCell) return;
+    const newCheckedKeys = new Set<string>();
+    const newIncorrectKeys = new Set<string>();
 
-    const key = `${focusedCell.rowNum}-${focusedCell.colNum}`;
-    const userAnswer = answers.get(key);
+    // Check all cells with user answers
+    answers.forEach((userAnswer, key) => {
+      if (userAnswer !== null) {
+        const [rowStr, colStr] = key.split("-");
+        const rowNum = parseInt(rowStr, 10);
+        const colNum = parseInt(colStr, 10);
 
-    // Only check if cell has user input
-    if (userAnswer === null) return;
+        const correctAnswer = calculateCorrectAnswer(rowNum, colNum);
 
-    const correctAnswer = calculateCorrectAnswer(
-      focusedCell.rowNum,
-      focusedCell.colNum,
-    );
+        newCheckedKeys.add(key);
 
-    const newCheckedKeys = new Set(checkedKeys);
-    const newIncorrectKeys = new Set(incorrectKeys);
+        if (userAnswer !== correctAnswer) {
+          newIncorrectKeys.add(key);
+        }
+      }
+    });
 
-    // Mark this cell as checked
-    newCheckedKeys.add(key);
-
-    // Check if answer is correct
-    if (userAnswer === correctAnswer) {
-      newIncorrectKeys.delete(key);
-    } else {
-      newIncorrectKeys.add(key);
-    }
-
-    // Recalculate statistics from all checked cells
+    // Recalculate statistics
     let correct = 0;
     let incorrect = 0;
 
@@ -169,7 +163,7 @@ export default function Practice() {
         ? Math.round((correct / newCheckedKeys.size) * 100)
         : 0;
     setAccuracy(calculatedAccuracy);
-  }, [focusedCell, answers, checkedKeys, incorrectKeys]);
+  }, [answers, checkedKeys, incorrectKeys, calculateCorrectAnswer]);
 
   const handleFocusCell = useCallback((rowNum: number, colNum: number) => {
     setFocusedCell({ rowNum, colNum });
