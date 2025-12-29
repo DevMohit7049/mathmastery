@@ -99,6 +99,23 @@ export default function Index() {
               </div>
             )}
 
+            {/* Face Two Calculation Section */}
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">
+                Advanced Calculation
+              </h2>
+              <Link
+                to="/face-two"
+                className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg shadow-lg p-6 md:p-8 text-white hover:shadow-xl transition-all duration-300 transform hover:scale-105 block"
+              >
+                <div className="text-4xl md:text-5xl mb-3">📊</div>
+                <h3 className="text-xl md:text-2xl font-bold">Face Two Calculation</h3>
+                <p className="text-sm text-white/80 mt-2">
+                  Calculate row and column sums in a grid
+                </p>
+              </Link>
+            </div>
+
             {/* Operations Selection */}
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">
