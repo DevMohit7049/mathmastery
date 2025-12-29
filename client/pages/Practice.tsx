@@ -313,15 +313,10 @@ export default function Practice() {
                 )}
                 <button
                   onClick={handleCheckAllAnswers}
-                  className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base"
-                  disabled={
-                    !focusedCell ||
-                    answers.get(
-                      `${focusedCell.rowNum}-${focusedCell.colNum}`,
-                    ) === null
-                  }
+                  className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={answers.size === 0}
                 >
-                  <span>✓</span> <span className="hidden sm:inline">Check</span>
+                  <span>✓</span> <span className="hidden sm:inline">Check All</span>
                   <span className="sm:hidden">Check</span>
                 </button>
               </div>
