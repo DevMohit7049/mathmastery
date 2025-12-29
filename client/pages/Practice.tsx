@@ -169,7 +169,13 @@ export default function Practice() {
         ? Math.round((correct / newCheckedKeys.size) * 100)
         : 0;
     setAccuracy(calculatedAccuracy);
-  }, [focusedCell, answers, checkedKeys, incorrectKeys, calculateCorrectAnswer]);
+  }, [
+    focusedCell,
+    answers,
+    checkedKeys,
+    incorrectKeys,
+    calculateCorrectAnswer,
+  ]);
 
   const handleCheckAllAnswers = useCallback(() => {
     const newCheckedKeys = new Set<string>();
@@ -320,9 +326,9 @@ export default function Practice() {
             <div className="bg-blue-50 border-l-4 border-blue-600 p-2 sm:p-3 lg:p-4 mb-3 sm:mb-4 lg:mb-6 rounded">
               <p className="text-blue-800 text-xs sm:text-sm lg:text-base leading-relaxed">
                 <strong>Instructions:</strong> Answer the math problems in the
-                table below. Click on a cell, type your answer, and click "Check"
-                to validate only that cell. Click "Check All" to check all answers
-                at once. Green means correct, red means incorrect.
+                table below. Click on a cell, type your answer, and click
+                "Check" to validate only that cell. Click "Check All" to check
+                all answers at once. Green means correct, red means incorrect.
               </p>
             </div>
 
@@ -381,7 +387,8 @@ export default function Practice() {
                   className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition text-xs sm:text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={answers.size === 0}
                 >
-                  <span>✓✓</span> <span className="hidden sm:inline">Check All</span>
+                  <span>✓✓</span>{" "}
+                  <span className="hidden sm:inline">Check All</span>
                   <span className="sm:hidden">All</span>
                 </button>
               </div>

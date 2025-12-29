@@ -109,7 +109,9 @@ export default function Index() {
                 className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg shadow-lg p-6 md:p-8 text-white block"
               >
                 <div className="text-4xl md:text-5xl mb-3">📊</div>
-                <h3 className="text-xl md:text-2xl font-bold">Face Two Calculation</h3>
+                <h3 className="text-xl md:text-2xl font-bold">
+                  Face Two Calculation
+                </h3>
                 <p className="text-sm text-white/80 mt-2">
                   Calculate row and column sums in a grid
                 </p>

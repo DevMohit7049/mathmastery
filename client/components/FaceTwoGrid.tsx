@@ -15,9 +15,8 @@ export const FaceTwoGrid = ({
   checkedKeys = new Set(),
   incorrectKeys = new Set(),
 }: FaceTwoGridProps) => {
-  const [answers, setAnswers] = useState<Map<string, number | null>>(
-    userAnswers,
-  );
+  const [answers, setAnswers] =
+    useState<Map<string, number | null>>(userAnswers);
   const inputRefs = useRef<Map<string, HTMLInputElement | null>>(new Map());
 
   useEffect(() => {
@@ -44,10 +43,7 @@ export const FaceTwoGrid = ({
     return total;
   };
 
-  const handleInputChange = (
-    key: string,
-    value: string,
-  ) => {
+  const handleInputChange = (key: string, value: string) => {
     const newAnswers = new Map(answers);
     newAnswers.set(key, value === "" ? null : parseInt(value, 10));
     setAnswers(newAnswers);
@@ -119,9 +115,7 @@ export const FaceTwoGrid = ({
                     onChange={(e) =>
                       handleInputChange(`row-${rowIndex}`, e.target.value)
                     }
-                    onKeyDown={(e) =>
-                      handleKeyDown(e, `row-${rowIndex}`)
-                    }
+                    onKeyDown={(e) => handleKeyDown(e, `row-${rowIndex}`)}
                     className={`w-full h-8 sm:h-9 lg:h-10 px-1 sm:px-2 lg:px-3 py-1 sm:py-1.5 lg:py-2 border-2 rounded text-center font-semibold text-slate-700 focus:outline-none text-xs sm:text-sm lg:text-base transition-colors ${
                       incorrectKeys.has(`row-${rowIndex}`)
                         ? "border-red-500 bg-red-50 focus:border-red-700"
@@ -156,9 +150,7 @@ export const FaceTwoGrid = ({
                     onChange={(e) =>
                       handleInputChange(`col-${colIndex}`, e.target.value)
                     }
-                    onKeyDown={(e) =>
-                      handleKeyDown(e, `col-${colIndex}`)
-                    }
+                    onKeyDown={(e) => handleKeyDown(e, `col-${colIndex}`)}
                     className={`w-full h-8 sm:h-9 lg:h-10 px-1 sm:px-2 lg:px-3 py-1 sm:py-1.5 lg:py-2 border-2 rounded text-center font-semibold text-slate-700 focus:outline-none text-xs sm:text-sm lg:text-base transition-colors ${
                       incorrectKeys.has(`col-${colIndex}`)
                         ? "border-red-500 bg-red-50 focus:border-red-700"
