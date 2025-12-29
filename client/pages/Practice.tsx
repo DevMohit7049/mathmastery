@@ -319,9 +319,10 @@ export default function Practice() {
           <div className="mb-4 sm:mb-6 lg:mb-8 pb-4 sm:pb-6 lg:pb-6 border-b border-slate-200">
             <div className="bg-blue-50 border-l-4 border-blue-600 p-2 sm:p-3 lg:p-4 mb-3 sm:mb-4 lg:mb-6 rounded">
               <p className="text-blue-800 text-xs sm:text-sm lg:text-base leading-relaxed">
-                <strong>Instructions:</strong> Answer all math problems in the
-                table below. Type your answers in the cells and click "Check All"
-                to validate all at once. Green means correct, red means incorrect.
+                <strong>Instructions:</strong> Answer the math problems in the
+                table below. Click on a cell, type your answer, and click "Check"
+                to validate only that cell. Click "Check All" to check all answers
+                at once. Green means correct, red means incorrect.
               </p>
             </div>
 
