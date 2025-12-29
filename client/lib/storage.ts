@@ -1,0 +1,60 @@
+export interface PracticeResult {
+  id: string;
+  type: string;
+  digits: number;
+  totalProblems: number;
+  correctAnswers: number;
+  incorrectAnswers: number;
+  accuracy: number;
+  timeSpent: number;
+  timestamp: number;
+}
+
+export interface StorageData {
+  results: PracticeResult[];
+}
+
+const STORAGE_KEY = 'calculation-mastery-results';
+
+export const getStorageData = (): StorageData => {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : { results: [] };
+  } catch {
+    return { results: [] };
+  }
+};
+
+export const saveResult = (result: PracticeResult): void => {
+  try {
+    const data = getStorageData();
+    data.results.push(result);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch {
+    console.error('Failed to save result');
+  }
+};
+
+export const getResults = (): PracticeResult[] => {
+  const data = getStorageData();
+  return data.results;
+};
+
+export const clearHistory = (): void => {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    console.error('Failed to clear history');
+  }
+};
+
+export const getResultsByType = (type: string): PracticeResult[] => {
+  return getResults().filter((r) => r.type === type);
+};
+
+export const getAverageAccuracy = (type?: string): number => {
+  const results = type ? getResultsByType(type) : getResults();
+  if (results.length === 0) return 0;
+  const totalAccuracy = results.reduce((sum, r) => sum + r.accuracy, 0);
+  return Math.round(totalAccuracy / results.length);
+};
