@@ -20,8 +20,10 @@ export interface FaceTwoResult {
   timestamp: number;
 }
 
+export type Result = PracticeResult | FaceTwoResult;
+
 export interface StorageData {
-  results: PracticeResult[];
+  results: Result[];
 }
 
 const STORAGE_KEY = 'calculation-mastery-results';
