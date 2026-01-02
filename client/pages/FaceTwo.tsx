@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaceTwoGrid } from "@/components/FaceTwoGrid";
 import { Statistics } from "@/components/Statistics";
+import { Timer } from "@/components/Timer";
+import { saveFaceTwoResult } from "@/lib/storage";
 
 const getRandomNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
