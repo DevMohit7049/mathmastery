@@ -224,22 +224,25 @@ export default function FaceTwo() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-              <button
-                onClick={handleRefreshProblems}
-                className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition text-xs sm:text-sm lg:text-base whitespace-nowrap"
-              >
-                <span>🔄</span> Refresh
-              </button>
-              <button
-                onClick={handleCheckAllAnswers}
-                className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={userAnswers.size === 0}
-              >
-                <span>✓</span>{" "}
-                <span className="hidden sm:inline">Check All</span>
-                <span className="sm:hidden">Check</span>
-              </button>
+            <div className="flex flex-col sm:flex-row gap-2 w-full justify-between items-start sm:items-center">
+              <Timer isActive={timerActive} onTimeUpdate={handleTimeUpdate} />
+              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <button
+                  onClick={handleRefreshProblems}
+                  className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition text-xs sm:text-sm lg:text-base whitespace-nowrap"
+                >
+                  <span>🔄</span> Refresh
+                </button>
+                <button
+                  onClick={handleCheckAllAnswers}
+                  className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={userAnswers.size === 0}
+                >
+                  <span>✓</span>{" "}
+                  <span className="hidden sm:inline">Check All</span>
+                  <span className="sm:hidden">Check</span>
+                </button>
+              </div>
             </div>
           </div>
 
