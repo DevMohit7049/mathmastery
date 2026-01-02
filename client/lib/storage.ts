@@ -74,8 +74,23 @@ export const getResultsByType = (type: string): PracticeResult[] => {
   return getResults().filter((r) => r.type === type);
 };
 
+export const getFaceTwoResults = (): FaceTwoResult[] => {
+  const data = getStorageData();
+  return data.results.filter((r) => r.type === 'face-two') as FaceTwoResult[];
+};
+
 export const getAverageAccuracy = (type?: string): number => {
-  const results = type ? getResultsByType(type) : getResults();
+  const data = getStorageData();
+  let results: Result[];
+
+  if (type === 'face-two') {
+    results = data.results.filter((r) => r.type === 'face-two');
+  } else if (type) {
+    results = data.results.filter((r) => r.type === type);
+  } else {
+    results = data.results;
+  }
+
   if (results.length === 0) return 0;
   const totalAccuracy = results.reduce((sum, r) => sum + r.accuracy, 0);
   return Math.round(totalAccuracy / results.length);
