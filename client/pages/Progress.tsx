@@ -15,6 +15,7 @@ export default function Progress() {
       subtraction: 'Subtraction',
       multiplication: 'Multiplication',
       division: 'Division',
+      'face-two': 'Face Two Calculation',
     };
     return labels[op] || op;
   };
