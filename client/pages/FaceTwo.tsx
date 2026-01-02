@@ -42,6 +42,8 @@ export default function FaceTwo() {
     setIncorrectAnswers(0);
     setAccuracy(0);
     setTotalAnswered(0);
+    setTimerActive(true);
+    setTimeSpent(0);
   }, []);
 
   const calculateRowSum = (rowIndex: number): number => {
