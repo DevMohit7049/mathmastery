@@ -85,7 +85,7 @@ export default function Progress() {
                 Total Time
               </p>
               <p className="text-3xl font-bold text-orange-600">
-                {formatTime(results.reduce((sum, r) => sum + r.timeSpent, 0))}
+                {formatTime(results.reduce((sum, r) => sum + ('timeSpent' in r ? r.timeSpent : 0), 0))}
               </p>
             </div>
           </div>
