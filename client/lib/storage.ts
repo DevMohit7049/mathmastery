@@ -47,6 +47,16 @@ export const saveResult = (result: PracticeResult): void => {
   }
 };
 
+export const saveFaceTwoResult = (result: FaceTwoResult): void => {
+  try {
+    const data = getStorageData();
+    data.results.push(result);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch {
+    console.error('Failed to save Face Two result');
+  }
+};
+
 export const getResults = (): PracticeResult[] => {
   const data = getStorageData();
   return data.results;
