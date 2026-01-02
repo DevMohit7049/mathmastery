@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaceTwoGrid } from "@/components/FaceTwoGrid";
 import { Statistics } from "@/components/Statistics";
+import { Timer } from "@/components/Timer";
+import { saveFaceTwoResult } from "@/lib/storage";
 
 const getRandomNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -19,6 +21,8 @@ export default function FaceTwo() {
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
   const [totalAnswered, setTotalAnswered] = useState(0);
+  const [timerActive, setTimerActive] = useState(true);
+  const [timeSpent, setTimeSpent] = useState(0);
 
   // Generate initial grid data (5x5)
   useEffect(() => {
@@ -38,6 +42,8 @@ export default function FaceTwo() {
     setIncorrectAnswers(0);
     setAccuracy(0);
     setTotalAnswered(0);
+    setTimerActive(true);
+    setTimeSpent(0);
   }, []);
 
   const calculateRowSum = (rowIndex: number): number => {
@@ -132,6 +138,10 @@ export default function FaceTwo() {
     setAccuracy(calculatedAccuracy);
   }, [userAnswers, gridData]);
 
+  const handleTimeUpdate = useCallback((time: number) => {
+    setTimeSpent(time);
+  }, []);
+
   const handleRefreshProblems = () => {
     const newGrid: number[][] = [];
     for (let i = 0; i < 5; i++) {
@@ -149,6 +159,22 @@ export default function FaceTwo() {
     setIncorrectAnswers(0);
     setAccuracy(0);
     setTotalAnswered(0);
+    setTimerActive(true);
+    setTimeSpent(0);
+  };
+
+  const handleSaveResult = () => {
+    const result = {
+      id: `${Date.now()}`,
+      type: "face-two" as const,
+      totalProblems: totalAnswered,
+      correctAnswers,
+      incorrectAnswers,
+      accuracy,
+      timestamp: Date.now(),
+    };
+    saveFaceTwoResult(result);
+    navigate("/");
   };
 
   const handleGoHome = () => {
@@ -202,22 +228,25 @@ export default function FaceTwo() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-              <button
-                onClick={handleRefreshProblems}
-                className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition text-xs sm:text-sm lg:text-base whitespace-nowrap"
-              >
-                <span>🔄</span> Refresh
-              </button>
-              <button
-                onClick={handleCheckAllAnswers}
-                className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={userAnswers.size === 0}
-              >
-                <span>✓</span>{" "}
-                <span className="hidden sm:inline">Check All</span>
-                <span className="sm:hidden">Check</span>
-              </button>
+            <div className="flex flex-col sm:flex-row gap-2 w-full justify-between items-start sm:items-center">
+              <Timer isActive={timerActive} onTimeUpdate={handleTimeUpdate} />
+              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <button
+                  onClick={handleRefreshProblems}
+                  className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition text-xs sm:text-sm lg:text-base whitespace-nowrap"
+                >
+                  <span>🔄</span> Refresh
+                </button>
+                <button
+                  onClick={handleCheckAllAnswers}
+                  className="flex items-center justify-center gap-2 px-2 sm:px-3 lg:px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={userAnswers.size === 0}
+                >
+                  <span>✓</span>{" "}
+                  <span className="hidden sm:inline">Check All</span>
+                  <span className="sm:hidden">Check</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -251,6 +280,14 @@ export default function FaceTwo() {
                   className="flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 lg:px-6 py-2 sm:py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition text-xs sm:text-sm lg:text-base"
                 >
                   <span>🔄</span> Refresh
+                </button>
+                <button
+                  onClick={handleSaveResult}
+                  className="flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 lg:px-6 py-2 sm:py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm lg:text-base"
+                >
+                  <span>💾</span>{" "}
+                  <span className="hidden sm:inline">Save Result</span>
+                  <span className="sm:hidden">Save</span>
                 </button>
                 <button
                   onClick={handleGoHome}
