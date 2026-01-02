@@ -57,7 +57,7 @@ export const saveFaceTwoResult = (result: FaceTwoResult): void => {
   }
 };
 
-export const getResults = (): PracticeResult[] => {
+export const getResults = (): Result[] => {
   const data = getStorageData();
   return data.results;
 };
@@ -70,7 +70,7 @@ export const clearHistory = (): void => {
   }
 };
 
-export const getResultsByType = (type: string): PracticeResult[] => {
+export const getResultsByType = (type: string): Result[] => {
   return getResults().filter((r) => r.type === type);
 };
 
