@@ -10,6 +10,16 @@ export interface PracticeResult {
   timestamp: number;
 }
 
+export interface FaceTwoResult {
+  id: string;
+  type: 'face-two';
+  totalProblems: number;
+  correctAnswers: number;
+  incorrectAnswers: number;
+  accuracy: number;
+  timestamp: number;
+}
+
 export interface StorageData {
   results: PracticeResult[];
 }
