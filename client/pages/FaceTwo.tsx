@@ -166,7 +166,7 @@ export default function FaceTwo() {
   const handleSaveResult = () => {
     const result = {
       id: `${Date.now()}`,
-      type: 'face-two' as const,
+      type: "face-two" as const,
       totalProblems: totalAnswered,
       correctAnswers,
       incorrectAnswers,
@@ -174,7 +174,7 @@ export default function FaceTwo() {
       timestamp: Date.now(),
     };
     saveFaceTwoResult(result);
-    navigate('/');
+    navigate("/");
   };
 
   const handleGoHome = () => {

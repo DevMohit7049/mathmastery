@@ -1,28 +1,41 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { getResults, getResultsByType, getAverageAccuracy, getFaceTwoResults } from '@/lib/storage';
-import type { Result } from '@/lib/storage';
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getResults,
+  getResultsByType,
+  getAverageAccuracy,
+  getFaceTwoResults,
+} from "@/lib/storage";
+import type { Result } from "@/lib/storage";
 
 export default function Progress() {
   const navigate = useNavigate();
   const { type } = useParams<{ type: string }>();
 
-  const results: Result[] = type ? (type === 'face-two' ? getFaceTwoResults() : getResultsByType(type)) : getResults();
+  const results: Result[] = type
+    ? type === "face-two"
+      ? getFaceTwoResults()
+      : getResultsByType(type)
+    : getResults();
   const avgAccuracy = type ? getAverageAccuracy(type) : getAverageAccuracy();
 
   const getOperationLabel = (op: string) => {
     const labels: Record<string, string> = {
-      addition: 'Addition',
-      subtraction: 'Subtraction',
-      multiplication: 'Multiplication',
-      division: 'Division',
-      'face-two': 'Face Two Calculation',
+      addition: "Addition",
+      subtraction: "Subtraction",
+      multiplication: "Multiplication",
+      division: "Division",
+      "face-two": "Face Two Calculation",
     };
     return labels[op] || op;
   };
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return (
+      date.toLocaleDateString() +
+      " " +
+      date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    );
   };
 
   const formatTime = (seconds: number) => {
@@ -44,7 +57,7 @@ export default function Progress() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           className="mb-6 flex items-center gap-2 text-white font-semibold hover:text-purple-100 transition"
         >
           <span>←</span> Back to Home
@@ -52,7 +65,7 @@ export default function Progress() {
 
         <div className="bg-white rounded-lg shadow-xl p-6 md:p-8">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
-            📊 {type ? getOperationLabel(type) : 'All'} Progress
+            📊 {type ? getOperationLabel(type) : "All"} Progress
           </h1>
           <p className="text-slate-600 mb-8 text-lg">
             Track your practice performance and improvement
@@ -64,13 +77,17 @@ export default function Progress() {
               <p className="text-slate-600 text-sm font-medium mb-2">
                 Total Sessions
               </p>
-              <p className="text-3xl font-bold text-blue-600">{results.length}</p>
+              <p className="text-3xl font-bold text-blue-600">
+                {results.length}
+              </p>
             </div>
             <div className="text-center p-4 bg-green-50 rounded-lg">
               <p className="text-slate-600 text-sm font-medium mb-2">
                 Average Accuracy
               </p>
-              <p className="text-3xl font-bold text-green-600">{avgAccuracy}%</p>
+              <p className="text-3xl font-bold text-green-600">
+                {avgAccuracy}%
+              </p>
             </div>
             <div className="text-center p-4 bg-purple-50 rounded-lg">
               <p className="text-slate-600 text-sm font-medium mb-2">
@@ -85,7 +102,12 @@ export default function Progress() {
                 Total Time
               </p>
               <p className="text-3xl font-bold text-orange-600">
-                {formatTime(results.reduce((sum, r) => sum + ('timeSpent' in r ? r.timeSpent : 0), 0))}
+                {formatTime(
+                  results.reduce(
+                    (sum, r) => sum + ("timeSpent" in r ? r.timeSpent : 0),
+                    0,
+                  ),
+                )}
               </p>
             </div>
           </div>
@@ -133,7 +155,9 @@ export default function Progress() {
                           {getOperationLabel(result.type)}
                         </td>
                         <td className="px-4 py-3 text-slate-700">
-                          {result.type === 'face-two' ? '5x5 Grid' : `${('digits' in result) ? result.digits : '-'}-Digit`}
+                          {result.type === "face-two"
+                            ? "5x5 Grid"
+                            : `${"digits" in result ? result.digits : "-"}-Digit`}
                         </td>
                         <td className="px-4 py-3 text-slate-700">
                           <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold">
@@ -144,17 +168,21 @@ export default function Progress() {
                           <span
                             className={`inline-block px-3 py-1 rounded-full font-semibold ${
                               result.accuracy >= 80
-                                ? 'bg-green-100 text-green-800'
+                                ? "bg-green-100 text-green-800"
                                 : result.accuracy >= 60
-                                  ? 'bg-yellow-100 text-yellow-800'
-                                  : 'bg-red-100 text-red-800'
+                                  ? "bg-yellow-100 text-yellow-800"
+                                  : "bg-red-100 text-red-800"
                             }`}
                           >
                             {result.accuracy}%
                           </span>
                         </td>
                         <td className="px-4 py-3 text-slate-700">
-                          {result.type === 'face-two' ? '-' : formatTime(('timeSpent' in result) ? result.timeSpent : 0)}
+                          {result.type === "face-two"
+                            ? "-"
+                            : formatTime(
+                                "timeSpent" in result ? result.timeSpent : 0,
+                              )}
                         </td>
                       </tr>
                     ))}
@@ -168,7 +196,7 @@ export default function Progress() {
                 No practice sessions yet. Start practicing to see your progress!
               </p>
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
                 className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
               >
                 Start Practicing

@@ -91,7 +91,11 @@ export default function Index() {
                     </p>
                     <p className="text-3xl font-bold text-orange-600">
                       {Math.round(
-                        results.reduce((sum, r) => sum + ('timeSpent' in r ? r.timeSpent : 0), 0) / 60,
+                        results.reduce(
+                          (sum, r) =>
+                            sum + ("timeSpent" in r ? r.timeSpent : 0),
+                          0,
+                        ) / 60,
                       )}
                       m
                     </p>
@@ -118,7 +122,7 @@ export default function Index() {
                     Calculate row and column sums in a grid
                   </p>
                 </Link>
-                {results.some((r) => r.type === 'face-two') && (
+                {results.some((r) => r.type === "face-two") && (
                   <Link
                     to="/progress/face-two"
                     className="bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg shadow-lg p-6 md:p-8 text-white block hover:shadow-xl transition-all duration-300 transform hover:scale-105"

@@ -12,7 +12,7 @@ export interface PracticeResult {
 
 export interface FaceTwoResult {
   id: string;
-  type: 'face-two';
+  type: "face-two";
   totalProblems: number;
   correctAnswers: number;
   incorrectAnswers: number;
@@ -26,7 +26,7 @@ export interface StorageData {
   results: Result[];
 }
 
-const STORAGE_KEY = 'calculation-mastery-results';
+const STORAGE_KEY = "calculation-mastery-results";
 
 export const getStorageData = (): StorageData => {
   try {
@@ -43,7 +43,7 @@ export const saveResult = (result: PracticeResult): void => {
     data.results.push(result);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {
-    console.error('Failed to save result');
+    console.error("Failed to save result");
   }
 };
 
@@ -53,7 +53,7 @@ export const saveFaceTwoResult = (result: FaceTwoResult): void => {
     data.results.push(result);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {
-    console.error('Failed to save Face Two result');
+    console.error("Failed to save Face Two result");
   }
 };
 
@@ -66,7 +66,7 @@ export const clearHistory = (): void => {
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch {
-    console.error('Failed to clear history');
+    console.error("Failed to clear history");
   }
 };
 
@@ -76,15 +76,15 @@ export const getResultsByType = (type: string): Result[] => {
 
 export const getFaceTwoResults = (): FaceTwoResult[] => {
   const data = getStorageData();
-  return data.results.filter((r) => r.type === 'face-two') as FaceTwoResult[];
+  return data.results.filter((r) => r.type === "face-two") as FaceTwoResult[];
 };
 
 export const getAverageAccuracy = (type?: string): number => {
   const data = getStorageData();
   let results: Result[];
 
-  if (type === 'face-two') {
-    results = data.results.filter((r) => r.type === 'face-two');
+  if (type === "face-two") {
+    results = data.results.filter((r) => r.type === "face-two");
   } else if (type) {
     results = data.results.filter((r) => r.type === type);
   } else {
