@@ -5,7 +5,7 @@ import type { Result } from "@/lib/storage";
 
 export default function Index() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const results = getResults();
+  const results: Result[] = getResults();
 
   const operations = [
     {
