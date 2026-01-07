@@ -37,8 +37,16 @@ const App = () => (
   </QueryClientProvider>
 );
 
+declare global {
+  interface Window {
+    __appRoot?: ReturnType<typeof createRoot>;
+  }
+}
+
 const container = document.getElementById("root");
 if (container) {
-  const root = createRoot(container);
-  root.render(<App />);
+  if (!window.__appRoot) {
+    window.__appRoot = createRoot(container);
+  }
+  window.__appRoot.render(<App />);
 }
