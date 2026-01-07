@@ -156,8 +156,8 @@ export default function Progress() {
                           {getOperationLabel(result.type)}
                         </td>
                         <td className="px-4 py-3 text-slate-700">
-                          {result.type === "face-two"
-                            ? "5x5 Grid"
+                          {result.type === "phase-two"
+                            ? `${"gridSize" in result ? result.gridSize : "5"}×${"gridSize" in result ? result.gridSize : "5"}`
                             : `${"digits" in result ? result.digits : "-"}-Digit`}
                         </td>
                         <td className="px-4 py-3 text-slate-700">
