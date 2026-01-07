@@ -10,7 +10,7 @@ const getRandomNumber = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const GRID_SIZES = [6, 7, 8, 9, 10];
+const GRID_SIZES = [5, 6, 7, 8, 9, 10];
 
 export default function FaceTwo() {
   const navigate = useNavigate();
