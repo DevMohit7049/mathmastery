@@ -7,7 +7,18 @@ import {
   getFaceTwoResults,
 } from "@/lib/storage";
 import type { Result } from "@/lib/storage";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from "recharts";
 
 export default function Progress() {
   const navigate = useNavigate();
@@ -252,7 +263,9 @@ export default function Progress() {
                                   className="border-b border-slate-200 hover:bg-slate-50 transition"
                                 >
                                   <td className="px-4 py-3 text-slate-700 font-medium">
-                                    {new Date(result.timestamp).toLocaleTimeString([], {
+                                    {new Date(
+                                      result.timestamp,
+                                    ).toLocaleTimeString([], {
                                       hour: "2-digit",
                                       minute: "2-digit",
                                     })}
@@ -267,7 +280,8 @@ export default function Progress() {
                                   </td>
                                   <td className="px-4 py-3 text-slate-700">
                                     <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold text-sm">
-                                      {result.correctAnswers}/{result.totalProblems}
+                                      {result.correctAnswers}/
+                                      {result.totalProblems}
                                     </span>
                                   </td>
                                   <td className="px-4 py-3 font-bold">
@@ -285,7 +299,9 @@ export default function Progress() {
                                   </td>
                                   <td className="px-4 py-3 text-slate-700 font-medium">
                                     {formatTime(
-                                      "timeSpent" in result ? result.timeSpent : 0,
+                                      "timeSpent" in result
+                                        ? result.timeSpent
+                                        : 0,
                                     )}
                                   </td>
                                 </tr>
