@@ -12,11 +12,13 @@ export interface PracticeResult {
 
 export interface FaceTwoResult {
   id: string;
-  type: "face-two";
+  type: "phase-two";
+  gridSize: number;
   totalProblems: number;
   correctAnswers: number;
   incorrectAnswers: number;
   accuracy: number;
+  timeSpent: number;
   timestamp: number;
 }
 
