@@ -104,27 +104,27 @@ export default function Index() {
               </div>
             )}
 
-            {/* Face Two Calculation Section */}
+            {/* Phase Two Calculation Section */}
             <div className="mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">
                 Advanced Calculation
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Link
-                  to="/face-two"
+                  to="/phase-two"
                   className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg shadow-lg p-6 md:p-8 text-white block hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
                   <div className="text-4xl md:text-5xl mb-3">📊</div>
                   <h3 className="text-xl md:text-2xl font-bold">
-                    Face Two Calculation
+                    Phase Two Calculation
                   </h3>
                   <p className="text-sm text-white/80 mt-2">
                     Calculate row and column sums in a grid
                   </p>
                 </Link>
-                {results.some((r) => r.type === "face-two") && (
+                {results.some((r) => r.type === "phase-two") && (
                   <Link
-                    to="/progress/face-two"
+                    to="/progress/phase-two"
                     className="bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg shadow-lg p-6 md:p-8 text-white block hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
                     <div className="text-4xl md:text-5xl mb-3">📈</div>
@@ -132,7 +132,7 @@ export default function Index() {
                       View Progress
                     </h3>
                     <p className="text-sm text-white/80 mt-2">
-                      Track your Face Two results and improvements
+                      Track your Phase Two results and improvements
                     </p>
                   </Link>
                 )}
