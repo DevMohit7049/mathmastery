@@ -74,7 +74,7 @@ export const FaceTwoGrid = ({
               <th className="border border-orange-600 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 text-center font-semibold text-xs sm:text-sm lg:text-base min-w-12 sm:min-w-16 lg:min-w-20">
                 #
               </th>
-              {Array.from({ length: 5 }).map((_, colIndex) => (
+              {Array.from({ length: gridSize }).map((_, colIndex) => (
                 <th
                   key={colIndex}
                   className="border border-orange-600 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 text-center font-semibold text-xs sm:text-sm lg:text-base min-w-12 sm:min-w-16 lg:min-w-20"
